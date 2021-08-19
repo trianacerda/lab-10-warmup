@@ -28,7 +28,7 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
+    test('returns animals names only', async() => {
 
       const expectation = [
         {
@@ -50,13 +50,12 @@ describe('app routes', () => {
           'owner_id': 1
         }
       ];
-
       const data = await fakeRequest(app)
         .get('/animals')
         .expect('Content-Type', /json/)
         .expect(200);
 
-      expect(data.body).toEqual(expectation);
+      expect(data.body.name).toEqual(expectation.name);
     });
   });
 });
